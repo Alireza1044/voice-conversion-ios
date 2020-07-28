@@ -32,7 +32,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         AKSettings.sampleRate = AudioKit.engine.inputNode.inputFormat(forBus: 0).sampleRate
         
-
+        let inputs = AudioKit.inputDevices!
+        try! AudioKit.setInputDevice(inputs[2])
         let micMixer = AKMixer(mic)
         tracker = AKFrequencyTracker.init(mic)
         micBooster = AKBooster(micMixer)
@@ -42,6 +43,8 @@ class ViewController: UIViewController {
         micBooster!.gain = 5
 
         AudioKit.output = pitchShifter
+        
+        AKSettings.defaultToSpeaker = true
 
         do{
             try AudioKit.start()
