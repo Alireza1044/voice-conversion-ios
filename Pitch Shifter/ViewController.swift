@@ -54,6 +54,7 @@ class ViewController: UIViewController {
     func setupPlot() {
         let plot = AKNodeOutputPlot(mic, frame: audioInputPlot.bounds)
         plot.plotType = .rolling
+        plot.backgroundColor = .none
         plot.shouldFill = true
         plot.shouldMirror = true
         plot.color = UIColor.blue
