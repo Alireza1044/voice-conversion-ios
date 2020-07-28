@@ -9,6 +9,9 @@
 import UIKit
 import AVFoundation
 import AudioKit
+import AudioKitUI
+import EZAudio
+
 
 class ViewController: UIViewController {
     
@@ -18,17 +21,20 @@ class ViewController: UIViewController {
 //    var a : AVAudioSession!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet var audioInputPlot: AKNodeOutputPlot!
     
     var micBooster: AKBooster?
     var pitchShifter: AKPitchShifter?
+    var tracker: AKFrequencyTracker!
+    let mic = AKMicrophone()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         AKSettings.sampleRate = AudioKit.engine.inputNode.inputFormat(forBus: 0).sampleRate
-        let mic = AKMicrophone()
+        
 
         let micMixer = AKMixer(mic)
-
+        tracker = AKFrequencyTracker.init(mic)
         micBooster = AKBooster(micMixer)
 
         pitchShifter = AKPitchShifter(micBooster, shift: 0)
@@ -42,7 +48,18 @@ class ViewController: UIViewController {
         } catch {
             print("error occured")
         }
+        setupPlot()
     }
+    
+    func setupPlot() {
+        let plot = AKNodeOutputPlot(mic, frame: audioInputPlot.bounds)
+        plot.plotType = .rolling
+        plot.shouldFill = true
+        plot.shouldMirror = true
+        plot.color = UIColor.blue
+        audioInputPlot.addSubview(plot)
+    }
+
     
     @IBAction func onSliderChanged(_ sender: Any) {
         label.text = "Shift Amount: \(Int(slider.value))"

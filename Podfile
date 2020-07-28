@@ -7,5 +7,7 @@ target 'Pitch Shifter' do
 
   # Pods for Pitch Shifter
   pod 'AudioKit'
-
+  pod 'EZAudio'
+  pod 'TPCircularBuffer'
+  pod 'AudioKit/UI'
 end
