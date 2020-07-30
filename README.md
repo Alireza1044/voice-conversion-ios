@@ -2,8 +2,8 @@
 
 An implementation of real time low latency voice conversion for iOS in swift
 
-![alt text](https://github.com/Alireza1044/voice-conversion-ios/blob/master/demo_dark.png?raw=true)
-![alt text](https://github.com/Alireza1044/voice-conversion-ios/blob/master/demo_light.png?raw=true)
+![alt text](https://github.com/Alireza1044/voice-conversion-ios/blob/master/demo_dark.png?raw=true | width=700)
+![alt text](https://github.com/Alireza1044/voice-conversion-ios/blob/master/demo_light.png?raw=true | width=700)
 
 ## Build
 
